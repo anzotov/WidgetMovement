@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget* parent) :
                     if(button->geometry().bottom() >= button->parentWidget()->contentsRect().bottom())
                     {
                         button->parentWidget()->setWindowTitle("You loose!");
+                        button->parentWidget()->setStyleSheet("QMainWindow { background: red }");
                     }
                     }); 
                 connect(button, &QPushButton::clicked, button, [button](){
