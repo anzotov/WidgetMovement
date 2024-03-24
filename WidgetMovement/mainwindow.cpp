@@ -30,6 +30,10 @@ MainWindow::MainWindow(QWidget* parent) :
                     if(!button->parentWidget()->contentsRect().contains(button->geometry())) {
                         button->deleteLater();
                     }
+                    if(button->geometry().bottom() >= button->parentWidget()->contentsRect().bottom())
+                    {
+                        button->parentWidget()->setWindowTitle("You loose!");
+                    }
                     }); 
                 connect(button, &QPushButton::clicked, button, [button](){
                     button->deleteLater();});
