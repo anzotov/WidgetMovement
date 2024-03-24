@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget* parent) :
                 auto position = QPoint(QRandomGenerator::global()->bounded(0, windowSize.width() - buttonSize.width()), 100);
                 button->setGeometry(QRect(position, buttonSize));
                 button->show();
+                button->setMouseTracking(true);
                 auto buttonTimer = new QTimer(button);
                 auto moveInterval = QRandomGenerator::global()->bounded(minMoveInvlMs, maxMoveInvlMs);
                 buttonTimer->setInterval(moveInterval);
