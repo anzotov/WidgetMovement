@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent)
 {
     resize(300, 600);
+    grabKeyboard();
     m_timer = new QTimer(this);
     m_timer->start(1000);
     connect(m_timer, &QTimer::timeout, this, [this]() {
@@ -30,6 +31,8 @@ MainWindow::MainWindow(QWidget* parent) :
                         button->deleteLater();
                     }
                     }); 
+                connect(button, &QPushButton::clicked, button, [button](){
+                    button->deleteLater();});
                 buttonTimer->start(); });
 }
 
