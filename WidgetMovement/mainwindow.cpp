@@ -20,8 +20,8 @@ MainWindow::MainWindow(QWidget* parent) :
                 auto windowSize = this->size();
                 auto position = QPoint(QRandomGenerator::global()->bounded(0, windowSize.width() - buttonSize.width()), 100);
                 button->setGeometry(QRect(position, buttonSize));
+                button->setText("*");
                 button->show();
-                button->setMouseTracking(true);
                 auto buttonTimer = new QTimer(button);
                 auto moveInterval = QRandomGenerator::global()->bounded(minMoveInvlMs, maxMoveInvlMs);
                 buttonTimer->setInterval(moveInterval);
@@ -33,11 +33,11 @@ MainWindow::MainWindow(QWidget* parent) :
                     }
                     if(button->geometry().bottom() >= button->parentWidget()->contentsRect().bottom())
                     {
-                        button->parentWidget()->setWindowTitle("You loose!");
+                        button->parentWidget()->setWindowTitle("Вы проиграли!");
                         button->parentWidget()->setStyleSheet("QMainWindow { background: red }");
                     }
                     }); 
-                connect(button, &QPushButton::clicked, button, [button](){
+                connect(button, &QPushButton::pressed, button, [button](){
                     button->deleteLater();});
                 buttonTimer->start(); });
 }
