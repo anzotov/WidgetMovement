@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget* parent) :
     m_timer = new QTimer(this);
     m_timer->start(1000);
     connect(m_timer, &QTimer::timeout, this, [this]() {
-                constexpr auto buttonSize = QSize(10, 10);
+                constexpr auto buttonSize = QSize(15, 15);
                 constexpr auto minCreateInvlMs = 100, maxInvlMs = 1000;
                 constexpr auto minMoveInvlMs = 15, maxMoveInvlMs = 30;
                 this->m_timer->setInterval(QRandomGenerator::global()->bounded(minCreateInvlMs, maxInvlMs));
@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget* parent) :
                 auto moveInterval = QRandomGenerator::global()->bounded(minMoveInvlMs, maxMoveInvlMs);
                 buttonTimer->setInterval(moveInterval);
                 connect(buttonTimer, &QTimer::timeout, button, [button](){
-                    constexpr auto movement = QPoint(0, 1);
+                    auto movement = button->underMouse()?QPoint(0, 2):QPoint(0, 1);
                     button->move(button->pos()+movement);
                     if(!button->parentWidget()->contentsRect().contains(button->geometry())) {
                         button->deleteLater();
